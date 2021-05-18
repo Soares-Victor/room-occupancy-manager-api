@@ -1,0 +1,54 @@
+
+plugins {
+    id 'io.freefair.lombok' version '5.0.1'
+    id 'org.springframework.boot' version '2.4.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+    id 'com.google.cloud.tools.jib' version '2.2.0'
+}
+
+ext {
+    springCloudVersion = 'Hoxton.SR8'
+    dockerRegistry = 'victorsoares'
+    imageRepository = 'room-occupancy-manager-api'
+}
+
+group = 'cloud.projectsys.victor'
+version = '1.0.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-webflux'
+    implementation 'org.apache.maven:maven-core:3.6.3'
+    implementation 'org.springframework.boot:spring-boot-starter-actuator'
+    implementation 'org.projectlombok:lombok:1.18.18'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'io.projectreactor:reactor-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jib {
+    container {
+        ports = ['80', '8080', '8081']
+    }
+    to {
+        image = "${dockerRegistry}/${imageRepository}:${version}"
+    }
+}
