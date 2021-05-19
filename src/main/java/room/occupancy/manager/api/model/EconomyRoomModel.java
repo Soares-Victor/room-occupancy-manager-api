@@ -5,8 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,6 +12,6 @@ import java.math.BigDecimal;
 public class EconomyRoomModel {
 
     private Integer usage;
-    private BigDecimal profit;
+    private Double profit;
 
 }

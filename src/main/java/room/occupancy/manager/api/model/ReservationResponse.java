@@ -13,7 +13,7 @@ import java.io.Serializable;
 @Builder
 public class ReservationResponse implements Serializable {
 
-    private EconomyRoomModel economyRoomModel;
     private PremiumRoomModel premiumRoomModel;
+    private EconomyRoomModel economyRoomModel;
 
 }
