@@ -5,6 +5,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
     id 'java'
     id 'com.google.cloud.tools.jib' version '2.2.0'
+    id 'jacoco'
 }
 
 ext {
@@ -37,13 +38,33 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.projectlombok:lombok:1.18.18'
     implementation 'org.modelmapper:modelmapper:2.3.7'
+    implementation 'org.jacoco:jacoco-maven-plugin:0.8.6'
     implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.5.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
 }
 
+jacoco {
+    toolVersion = "0.8.6"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+    dependsOn test // tests are required to run before generating the report
+}
+
 test {
     useJUnitPlatform()
+    finalizedBy jacocoTestReport
+}
+
+springBoot {
+    buildInfo()
 }
 
 jib {
