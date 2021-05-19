@@ -13,8 +13,3 @@ management:
 
 server:
   port: 8080
-
-spring:
-  data:
-    mongodb:
-      uri: "mongodb+srv://victor:0113@victorsoaresdb.aezzb.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"

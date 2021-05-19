@@ -36,7 +36,6 @@ dependencies {
     implementation 'org.apache.maven:maven-core:3.6.3'
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     implementation 'org.projectlombok:lombok:1.18.18'
-    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
     implementation 'org.modelmapper:modelmapper:2.3.7'
     implementation 'org.springdoc:springdoc-openapi-webflux-ui:1.5.2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
