@@ -5,13 +5,13 @@ metadata:
   namespace: default
   annotations:
     allow.http: "true"
-    nginx.ingress.kubernetes.io/rewrite-target: /${project.name}
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
     - host: app.projectsysvictor.com
       http:
         paths:
-          - path: /${project.name}
+          - path: /
             backend:
               serviceName: ${project.name}-service-v${version.major}
               servicePort: http-port
