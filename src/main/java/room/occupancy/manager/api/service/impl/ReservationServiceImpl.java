@@ -64,11 +64,10 @@ public class ReservationServiceImpl implements ReservationService {
                 .profit(economyProfit)
                 .build();
 
-        ReservationResponse build = ReservationResponse.builder()
+        return ReservationResponse.builder()
                 .economyRoomModel(economyRoomModel)
                 .premiumRoomModel(premiumRoomModel)
                 .build();
-        return build;
     }
 
     private List<Double> getListEconomyRooms(ReservationRequest reservationRequest) {
