@@ -13,3 +13,9 @@ management:
 
 server:
   port: 8080
+
+spring:
+  application:
+    name: room-occupancy-manager-api
+  webflux:
+    base-path: /teste
