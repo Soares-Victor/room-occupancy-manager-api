@@ -44,6 +44,10 @@ dependencies {
     testImplementation 'io.projectreactor:reactor-test'
 }
 
+jacoco {
+    toolVersion = "0.8.6"
+    reportsDir = file("$buildDir/customJacocoReportDir")
+}
 
 jacocoTestReport {
     reports {
