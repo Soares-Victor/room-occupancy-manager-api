@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1beta1
+kind: Ingress
+metadata:
+  name: ${project.name}-ingress-v${version.major}
+  namespace: default
+  annotations:
+    allow.http: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /${project.name}
+spec:
+  rules:
+    - host: app.projectsysvictor.com
+      http:
+        paths:
+          - path: /${project.name}
+            backend:
+              serviceName: ${project.name}-service-v${version.major}
+              servicePort: http-port

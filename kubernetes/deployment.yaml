@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ${project.name}-v${version.major}
+  namespace: default
+  labels:
+    app: ${project.name}
+    version: v${version.major}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ${project.name}
+      version: v${version.major}
+  template:
+    metadata:
+      namespace: microservices
+      labels:
+        app: ${project.name}
+        version: v${version.major}
+    spec:
+      containers:
+        - name: ${project.name}
+          resources:
+            requests:
+              memory: "282Mi"
+              cpu: "250m"
+            limits:
+              memory: "384Mi"
+              cpu: "500m"
+          image: ${project.repository}/${project.imageRepository}:${project.version}
+          imagePullPolicy: Always
+          ports:
+            - name: http-port
+              containerPort: 8080
+            - name: management-port
+              containerPort: 8081
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: management-port
+            initialDelaySeconds: 5
+            timeoutSeconds: 2
+            periodSeconds: 5
+            failureThreshold: 6
+          envFrom:
+            - configMapRef:
+                name: default-vars
+                optional: true
+          env:
+            - name: JAVA_TOOL_OPTIONS
+              value: -XX:MinRAMPercentage=75 -XX:MaxRAMPercentage=75 -Xms256m -Xmx256m
+            - name: SECRET_DB_USERNAME
+              value: 'USERNAME'
+            - name: SECRET_DB_PASSWORD
+              value: 'PASSWORD'

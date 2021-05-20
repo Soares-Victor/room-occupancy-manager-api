@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ${project.name}
+  namespace: default
+data:
+  application.yaml: |-
+    greeting:
+      message: Say Hello to Kubernetes
+    ---
+    spring:
+      devtools:
+        add-properties: false
