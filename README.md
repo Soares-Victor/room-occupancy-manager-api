@@ -93,7 +93,7 @@ $ curl --location --request POST 'http://app.projectsysvictor.com/room-occupancy
 
    
 3. Check the Quality Gate: 
-[Sonar](http://sonar.projectsysvictor.com/dashboard?branch=main&id=room-occupancy)
+[Sonar](http://sonar.projectsysvictor.com/dashboard?branch=main&id=Soares-Victor-room-occupancy-manager-api)
 
 
 4. Also check the agile board [Board Trello](https://trello.com/b/taTfFRZa)
